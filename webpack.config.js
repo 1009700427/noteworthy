@@ -27,9 +27,7 @@ module.exports = {
                     loader: "css-loader" // translates CSS into CommonJS
                 }, {
                     loader: "less-loader" // compiles Less to CSS
-                }
-
-                ]
+                }]
             }
         ]
     },
@@ -38,7 +36,6 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
-        contentBase: './reactApp',
         hot: true,
         inline: true,
         open: true,
