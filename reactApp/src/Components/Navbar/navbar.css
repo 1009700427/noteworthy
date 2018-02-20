@@ -4,7 +4,8 @@
 }
 .navbar {
   background: none;
+  color: white;
 }
 a {
-  color: white;
+  color: white !important;
 }

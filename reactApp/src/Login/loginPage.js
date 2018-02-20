@@ -2,29 +2,51 @@
  * Created by siyuanxu on 2/11/18.
  */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Welcome from '../Components/Welcome/welcome';
 import "./loginPage.less";
 export default class LoginPage extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            username: "",
+            password: "",
+            fireRedirect: false
+        }
+    }
+    onSubmit(event){
+        event.preventDefault();
+        this.setState({
+            fireRedirect: true
+        });
+    }
+    componentDidMount(){
+        $('#submit-button').popover('disable');
+    }
     render() {
         return (
             <div className="LoginPage">
                 <Welcome/>
                 <div id="form-parent">
-                    <form id="form-child">
+                    <form id="form-child" onSubmit={(e) => this.onSubmit(e)}>
                         <div className="form-group">
                             <label>Username</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username"/>
+                            <input className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username"
+                                   onChange={(e) => this.setState({username: e.target.value})}/>
                         </div>
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
+                                   onChange={(e) => this.setState({password: e.target.value})}/>
                         </div>
-                        <button type="submit" className="btn btn-lg btn-outline-light my-2 my-sm-0">Sign in</button><br/>
+                        <button type="submit" className="btn btn-lg btn-outline-light my-2 my-sm-0" id="submit-button" data-container="body"
+                                data-toggle="popover" data-placement="right" data-content={this.state.submitMsg}>Sign in</button><br/>
                         <Link to="/sign-up"><small><a>New User?</a></small></Link>
                     </form>
                 </div>
+                {
+                    this.state.fireRedirect && <Redirect to={{pathname: '/user-home'}}></Redirect>
+                }
             </div>
         );
     }

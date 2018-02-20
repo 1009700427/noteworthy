@@ -34,10 +34,13 @@ export default class NavbarTop extends React.Component{
                             {/*</ul>*/}
                             <form className="form-inline">
                                 <div className="form-group">
-                                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                                    <input className="form-control mr-sm-2" type="search" placeholder="Search For Documents" aria-label="Search"/>
                                 </div>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                             </form>
+                            <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+                                <button className="btn btn-outline-danger my-2 mr-sm-2 my-sm-0" id="sign-out">Sign Out</button>
+                            </div>
                         </div>
 
                 </nav>
