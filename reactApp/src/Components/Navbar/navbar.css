@@ -1,0 +1,10 @@
+.navbar-form .form-control {
+  display: inline-block;
+  width: 100%;
+}
+.navbar {
+  background: none;
+}
+a {
+  color: white;
+}

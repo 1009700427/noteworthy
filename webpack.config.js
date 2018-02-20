@@ -28,7 +28,15 @@ module.exports = {
                 }, {
                     loader: "less-loader" // compiles Less to CSS
                 }]
-            }
+            },
+            {
+                test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+                use: [
+                    {
+                        loader: 'url-loader'
+                    },
+                ]
+            },
         ]
     },
     plugins: [

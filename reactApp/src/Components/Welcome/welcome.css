@@ -1,0 +1,13 @@
+#welcome {
+  position: fixed;
+  top: 50%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.vl {
+  position: fixed;
+  left: 35%;
+  border-left: 3px solid white;
+  height: 100vh;
+}
