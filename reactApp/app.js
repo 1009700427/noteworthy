@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import LoginPage from './src/Login/loginPage';
 import SignUp from './src/SignUp/signUp';
 import UserHome from './src/UserHome/userHome';
+import TextEditor from './src/Components/TextEditor/textEditor';
 import backgroundImage from "./src/img/login-background.jpg";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './app.less';
@@ -20,6 +21,7 @@ const router = (
                     <Route path="/" exact component={LoginPage}/>
                     <Route path="/sign-up" exact component={SignUp}/>
                     <Route path="/user-home" exact component={UserHome}/>
+                    <Route path="/text-editor" exact component={TextEditor}/>
                 </Switch>
             </BrowserRouter>
 
