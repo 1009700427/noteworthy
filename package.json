@@ -7,12 +7,14 @@
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
     "history": "^4.7.2",
+    "immutable": "^3.8.2",
     "jquery": "^3.3.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",

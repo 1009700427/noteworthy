@@ -8,3 +8,34 @@
   margin: 0 auto;
   color: black !important;
 }
+.text-editor .headerbar {
+  margin: 0.3%;
+}
+.text-editor .headerbar .headerbar-left {
+  float: left;
+}
+.text-editor .headerbar .form-inline {
+  float: left;
+}
+.text-editor .headerbar .search-box {
+  width: 25vh !important;
+}
+.text-editor .headerbar .headerbar-right {
+  float: right;
+}
+.text-editor .toolbar .toolbar-selector {
+  width: 6%;
+  float: left;
+  margin-left: 0.25%;
+  margin-right: 0.25%;
+}
+.text-editor .toolbar .toolbar-divider {
+  margin-left: 0.25%;
+  margin-right: 0.25%;
+  float: left;
+}
+.text-editor .toolbar .toolbar-style-button {
+  margin-left: 0.25%;
+  margin-right: 0.25%;
+  float: left;
+}
