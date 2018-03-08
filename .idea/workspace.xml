@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="28a7a4e1-b519-43cb-bde7-88991e475b61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/build/app.bundle.js" afterPath="$PROJECT_DIR$/reactApp/build/app.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/Login/loginPage.js" afterPath="$PROJECT_DIR$/reactApp/src/Login/loginPage.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,8 +22,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+            <state relative-caret-position="240">
+              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -46,8 +45,8 @@
             <state relative-caret-position="210">
               <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <marker date="1520468743608" expanded="true" signature="85:475" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
-                <marker date="1520468743608" expanded="true" signature="490:631" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
+                <marker date="1520468862967" expanded="true" signature="85:506" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
+                <marker date="1520468862967" expanded="true" signature="521:662" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -548,7 +547,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39037000" />
+    <option name="totallyTimeSpent" value="39122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
@@ -744,8 +743,8 @@
         <state relative-caret-position="255">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <marker date="1520468743608" expanded="true" signature="85:475" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
-            <marker date="1520468743608" expanded="true" signature="490:631" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
+            <marker date="1520468862967" expanded="true" signature="85:506" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
+            <marker date="1520468862967" expanded="true" signature="521:662" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -975,8 +974,8 @@
         <state relative-caret-position="210">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <marker date="1520468743608" expanded="true" signature="85:475" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
-            <marker date="1520468743608" expanded="true" signature="490:631" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
+            <marker date="1520468862967" expanded="true" signature="85:506" ph="{&quot;animate.css&quot;: &quot;^3.6.1&quot;...}" />
+            <marker date="1520468862967" expanded="true" signature="521:662" ph="{&quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -1005,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        <state relative-caret-position="240">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding />
         </state>
       </provider>
