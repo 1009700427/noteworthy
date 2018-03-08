@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Editor, EditorState, RichUtils} from 'draft-js';
 const {colors, fonts, sizes} = require("./stylingConsts");
+import Octicon from 'react-octicon';
 import './textEditor.less';
 import 'draft-js/dist/Draft.css';
 
@@ -36,7 +37,9 @@ export default class TextEditor extends Component {
             <div className="text-editor">
                 <div className="headerbar">
                     <div className="headerbar-left">
+                        {/*<button type="button" className="btn btn-outline-danger btn-sm" aria-label="Left Align" onClick={() => this.goBack()}><Octicon name="arrow-left"/></button>*/}
                         <button type="button" className="btn btn-outline-danger btn-sm" aria-label="Left Align" onClick={() => this.goBack()}>Return</button>
+
                         &nbsp;&nbsp;
                         <span className="document-title">
                             {/*{this.props.documentTitle}*/}
@@ -49,11 +52,11 @@ export default class TextEditor extends Component {
 
                         <form className="form-inline">
                             <div className="form-group">
-                                <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-item">Save</button>
+                                <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm toolbar-button toolbar-item">Save</button>
                                 &nbsp;<span className="toolbar-divider"> | </span>&nbsp;
                                 <input className="form-control mr-sm-2 form-control-sm" type="search" placeholder="Search For Content" aria-label="Search"/>
                             </div>
-                            <button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Search</button>
+                            <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Search</button>
                         </form>
                     </span>
                     <br/>
@@ -73,17 +76,32 @@ export default class TextEditor extends Component {
                         {sizes.map(size => (<option className="toolbar-selector-content" key={counter++} value={size}> {size} </option>))}
                     </select>
                     &nbsp;<span className="toolbar-divider"> | </span>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Insert Link</button>
+                    &nbsp;<span className="toolbar-divider"> | </span>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Bold</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Italicize</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Underline</button>
+                    &nbsp;<span className="toolbar-divider"> | </span>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Left Align</button>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Center Align</button>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Right Align</button>
+                    &nbsp;<span className="toolbar-divider"> | </span>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Indent</button>
+                    &nbsp;<span className="toolbar-divider"> | </span>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Bulleted List</button>
                 </div>
 
-                {/*<button onClick={() => this.makeBold()}>Bold</button>*/}
-                {/*<Editor*/}
-                    {/*placeholder="This is the editor"*/}
-                    {/*onChange={(editorState) => this.onChange(editorState)}*/}
-                    {/*editorState = {this.state.editorState}*/}
-                {/*/>*/}
+                <br/>
+                <br/>
+                <div id="text-editor-container">
+                    <div id="editor-padding">
+                        <Editor
+                            id="text-editor"
+                            placeholder="This is the editor"
+                            onChange={(editorState) => this.onChange(editorState)}
+                            editorState = {this.state.editorState}/>
+                    </div>
+                </div>
             </div>
         );
     }
