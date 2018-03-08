@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import $ from "jquery";
 import Welcome from '../Components/Welcome/welcome';
 import "./loginPage.less";
 export default class LoginPage extends Component {
@@ -21,7 +22,7 @@ export default class LoginPage extends Component {
         });
     }
     componentDidMount(){
-        $('#submit-button').popover('disable');
+        // $('#submit-button').popover('disable');
     }
     render() {
         return (
