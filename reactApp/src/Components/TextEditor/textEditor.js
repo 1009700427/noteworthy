@@ -97,7 +97,7 @@ export default class TextEditor extends Component {
                     <div id="editor-padding">
                         <Editor
                             id="text-editor"
-                            placeholder="This is the editor"
+                            placeholder="Type Text Here!"
                             onChange={(editorState) => this.onChange(editorState)}
                             editorState = {this.state.editorState}/>
                     </div>
