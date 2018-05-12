@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').Server(app);
 var path    = require("path");
 //expecting an http server
@@ -12,11 +13,8 @@ io.on('connection', function(socket){
     });
 });
 
-// Example route
-app.get('/', function (req, res) {
-    console.log(__dirname);
-    res.sendFile(path.join(__dirname+"/../index.html"));
-});
+app.use(express.static(__dirname + '/../'));
+
 
 
 server.listen(port, function(){
