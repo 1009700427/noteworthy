@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, Modifier } from 'draft-js';
 const {colors, fonts, sizes} = require("./stylingConsts");
 import io from 'socket.io-client';
 import './textEditor.less';
@@ -14,6 +14,7 @@ export default class TextEditor extends Component {
         super(props);
         this.state = {editorState: EditorState.createEmpty()};
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
+        this._onFontStyleClick = this._onFontStyleClick.bind(this);
     }
     onChange(editorState){
         this.setState({
@@ -31,6 +32,51 @@ export default class TextEditor extends Component {
         } else {
             this.onChange(RichUtils.toggleBlockType(this.state.editorState, style));
         }
+    }
+    /*  _onFontStyleClick toggles custom inline styles (font color, size, and family)
+     **  selectId: id of the selection dropdown menu
+     **  arr: array of inline styles of a given category (color, size, family);
+     */
+    _onFontStyleClick(selectId, arr) {
+        // get the value selected in the window
+        let e = document.getElementById(selectId);
+        let toggledStyle = e.options[e.selectedIndex].value;
+        console.log(selectId);
+        console.log(arr);
+        console.log(toggledStyle);
+        // get editor state and selection state
+        // const { editorState } = this.state;
+        // const selection = editorState.getSelection();
+        // // remove all other inline styling of this type to avoid toggling conflicts
+        // const nextContentState = arr.reduce((contentState, style) => {
+        //     return Modifier.removeInlineStyle(contentState, selection, style)
+        // }, editorState.getCurrentContent());
+        // let nextEditorState = EditorState.push(
+        //     editorState,
+        //     nextContentState,
+        //     'change-inline-style'
+        // );
+        // const currentStyle = editorState.getCurrentInlineStyle();
+        // // unset style override for current style
+        // if (selection.isCollapsed()) {
+        //     nextEditorState = currentStyle.reduce((state, style) => {
+        //         return RichUtils.toggleInlineStyle(state, style);
+        //     }, nextEditorState);
+        // }
+        // // if this style is being toggled on, apply it
+        // if (!currentStyle.has(toggledStyle)) {
+        //     nextEditorState = RichUtils.toggleInlineStyle(
+        //         nextEditorState,
+        //         toggledStyle
+        //     );
+        // }
+        //console.log(nextEditorState);
+        // updates editor state
+        //this.onChange(nextEditorState);
+
+        this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC"));
+        console.log(this.state.editorState);
+        //this._onClick()
     }
     /*  handleKeyCommand handles keyboard commands
      **  commands are returned by keyBindingFn, which is triggered by set key combinations
@@ -95,7 +141,7 @@ export default class TextEditor extends Component {
                 </div>
                 <div className="toolbar">
 
-                    <select className="form-control form-control-sm toolbar-selector">
+                    <select className="form-control form-control-sm toolbar-selector" id="fontColor" onChange={() => this._onFontStyleClick("fontColor", colors)}>
                         {colors.map(color => (<option key={counter++} value={color}> {color} </option>))}
                     </select>
                     &nbsp;<span className="toolbar-divider"> | </span>&nbsp;
@@ -108,7 +154,7 @@ export default class TextEditor extends Component {
                         {sizes.map(size => (<option className="toolbar-selector-content" key={counter++} value={size}> {size} </option>))}
                     </select>
                     &nbsp;<span className="toolbar-divider"> | </span>
-                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Insert Link</button>
+                    <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('inline', 'LINK')}>Link</button>
                     &nbsp;<span className="toolbar-divider"> | </span>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('inline', 'BOLD')}>Bold</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('inline', 'ITALIC')}>Italicize</button>
@@ -117,8 +163,6 @@ export default class TextEditor extends Component {
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('block', 'align-left')}>Left Align</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('block', 'align-center')}>Center Align</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('block', 'align-right')}>Right Align</button>
-                    {/*&nbsp;<span className="toolbar-divider"> | </span>*/}
-                    {/*<button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button">Indent</button>*/}
                     &nbsp;<span className="toolbar-divider"> | </span>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('block', 'unordered-list-item')}>Bulleted List</button>
                     <button className="btn btn-outline-success my-2 my-sm-0 btn-sm toolbar-button toolbar-style-button" onClick={() => this._onClick('block', 'ordered-list-item')}>Numbered List</button>

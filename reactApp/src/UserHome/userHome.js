@@ -11,7 +11,7 @@ export default class UserHome extends Component {
         return(
             <div className="user-home">
                 <NavbarTop/>
-                <Link to="#">
+                <Link to="/text-editor">
                     <button className="btn btn-outline-light my-2 my-sm-0">New File</button>
                 </Link>
                 &nbsp;&nbsp;

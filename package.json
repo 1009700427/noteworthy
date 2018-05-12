@@ -25,7 +25,8 @@
   "scripts": {
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "webpack": "webpack --watch & webpack-dev-server"
+    "webpack": "webpack --watch & webpack-dev-server",
+    "serve": "node ./Backend/Server.js"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
