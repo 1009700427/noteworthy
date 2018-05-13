@@ -3,7 +3,8 @@
  */
 import React, { Component } from 'react';
 import Welcome from '../Components/Welcome/welcome';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import './signUp.less';
 
 export default class SignUp extends Component {
@@ -14,7 +15,7 @@ export default class SignUp extends Component {
             username: "",
             password: "",
             passwordAgain: "",
-            submitMsg: "problem!"
+            submitMsg: "Passwords must be the same and longer than 5 characters!"
         }
     }
     // submit data to database
@@ -23,17 +24,31 @@ export default class SignUp extends Component {
         if(this.state.password==this.state.passwordAgain && this.state.password.length>=5)
         {
             $('#submit-button').popover('hide');
-            this.setState({
-                fireRedirect: true
-            });
-
+            axios.get("http://localhost:3000/signup", {
+                params: {
+                        username: this.state.username,
+                        password: this.state.password
+                    }
+                })
+                .then((resp) => {
+                    if(resp.data)
+                    {
+                        this.setState({
+                            fireRedirect: true
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log("signup error!", err);
+                });
         }
         else {
             $('#submit-button').popover('enable');
         }
     }
     componentDidMount(){
-        $('#submit-button').popover('disable');
+        $('#submit-button').popover('enable');
+        $('#submit-button').popover('hide');
     }
     render(){
         return(
@@ -53,11 +68,12 @@ export default class SignUp extends Component {
                         </div>
                         <div className="form-group">
                             <label>Password Again</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password Again"
+                            <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password Again"
                                    onChange={(e) => this.setState({passwordAgain: e.target.value})}/>
                         </div>
                         <button type="submit" className="btn btn-lg btn-outline-light my-2 my-sm-0" id="submit-button" data-container="body"
                                 data-toggle="popover" data-placement="right" data-content={this.state.submitMsg}>Sign Up</button><br/>
+                        <Link to="/"><small><a>Home</a></small></Link>
                     </form>
                 </div>
                 {

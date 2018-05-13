@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import $ from "jquery";
 import axios from 'axios';
 import Welcome from '../Components/Welcome/welcome';
 import "./loginPage.less";
@@ -13,7 +12,8 @@ export default class LoginPage extends Component {
         this.state = {
             username: "",
             password: "",
-            fireRedirect: false
+            fireRedirect: false,
+            submitErrMsg: "Wrong username or password!"
         }
     }
     onSubmit(event){
@@ -27,9 +27,13 @@ export default class LoginPage extends Component {
             .then(resp => {
                 console.log(resp);
                 if(resp.data){
+                    $('#submit-button').popover('hide');
                     this.setState({
                         fireRedirect: true
                     });
+                }
+                else {
+                    $('#submit-button').popover('enable');
                 }
             })
             .catch(err => {
@@ -37,7 +41,8 @@ export default class LoginPage extends Component {
             });
     }
     componentDidMount(){
-        // $('#submit-button').popover('disable');
+        $('#submit-button').popover('enable');
+        $('#submit-button').popover('hide');
     }
     render() {
         return (
@@ -56,7 +61,7 @@ export default class LoginPage extends Component {
                                    onChange={(e) => this.setState({password: e.target.value})}/>
                         </div>
                         <button type="submit" className="btn btn-lg btn-outline-light my-2 my-sm-0" id="submit-button" data-container="body"
-                                data-toggle="popover" data-placement="right" data-content={this.state.submitMsg}>Sign in</button><br/>
+                                data-toggle="popover" data-placement="right" data-content={this.state.submitErrMsg}>Sign in</button><br/>
                         <Link to="/sign-up"><small><a>New User?</a></small></Link>
                     </form>
                 </div>

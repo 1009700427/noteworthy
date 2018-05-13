@@ -12,19 +12,11 @@ function findUser(_username, _password, db, callback){
     const collection = db.collection('users');
     // Find some documents
     collection.find({username: _username, password: _password}).toArray((err, docs) => {
-    //collection.find({}).toArray((err, docs) => {
         assert.equal(err, null);
         console.log("Found the following records");
         var result = false;
-        console.log("docs: " + docs);
-        console.log(typeof(docs));
-        console.log("1: ", docs==={});
-        console.log("2: ", docs===[]);
-        console.log("3: ", docs.length);
-        console.log(_username, _password);
         if(docs.length!=0)
         {
-            console.log("set true");
             result = true;
         }
         callback && callback(result);
@@ -32,7 +24,7 @@ function findUser(_username, _password, db, callback){
 }
 
 
-module.exports.loginAuth = function(username, password, callback){
+module.exports.loginAuth = (username, password, callback) => {
     // Use connect method to connect to the server
     MongoClient.connect(url, (err, client) => {
         assert.equal(null, err);
@@ -43,5 +35,27 @@ module.exports.loginAuth = function(username, password, callback){
             client.close();
             callback && callback(_result);
         });
+    });
+};
+
+function addUser(_username, _password, db, callback){
+    // Get the documents collection
+    const collection = db.collection('users');
+    // Find some documents
+    collection.insert({username: _username, password: _password}, (err, docs) => {
+        assert.equal(err, null);
+        console.log("inserted new user!");
+    });
+}
+
+module.exports.userSignup = (username, password, callback) => {
+    // Use connect method to connect to the server
+    MongoClient.connect(url, (err, client) => {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        const db = client.db(dbName);
+        addUser(username, password, db);
+        callback && callback();
     });
 };

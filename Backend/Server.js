@@ -23,6 +23,13 @@ app.get('/loginAuth', (req, res)=>{
     });
 });
 
+// performs user sign up
+app.get('/signup', (req, res) => {
+    dbDriver.userSignup(req.query.username, req.query.password, () => {
+        res.send(true);
+    });
+});
+
 server.listen(port, function(){
     console.log('listening on *:' + port);
 });
