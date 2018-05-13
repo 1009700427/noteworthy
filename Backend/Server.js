@@ -5,6 +5,7 @@ var path    = require("path");
 //expecting an http server
 const io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
+const dbDriver = require('./database/dbDriver');
 
 
 io.on('connection', function(socket){
@@ -15,7 +16,12 @@ io.on('connection', function(socket){
 
 app.use(express.static(__dirname + '/../'));
 
-
+// performs login authentication
+app.get('/loginAuth', (req, res)=>{
+    dbDriver.loginAuth(req.query.username, req.query.password, (result) => {
+        res.send(result);
+    });
+});
 
 server.listen(port, function(){
     console.log('listening on *:' + port);

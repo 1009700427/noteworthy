@@ -11,6 +11,8 @@
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "jquery": "^3.3.1",
+    "mongodb": "^3.1.0-beta4",
+    "mongodb-stitch": "^3.1.2",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
@@ -26,6 +28,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "webpack": "webpack --watch & webpack-dev-server",
+    "build": "webpack",
     "serve": "node ./Backend/Server.js"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import $ from "jquery";
+import axios from 'axios';
 import Welcome from '../Components/Welcome/welcome';
 import "./loginPage.less";
 export default class LoginPage extends Component {
@@ -17,9 +18,23 @@ export default class LoginPage extends Component {
     }
     onSubmit(event){
         event.preventDefault();
-        this.setState({
-            fireRedirect: true
-        });
+        axios.get("http://localhost:3000/loginAuth", {
+            params: {
+                username: this.state.username,
+                password: this.state.password
+            }
+        })
+            .then(resp => {
+                console.log(resp);
+                if(resp.data){
+                    this.setState({
+                        fireRedirect: true
+                    });
+                }
+            })
+            .catch(err => {
+                console.log("Error: fails to connect to server for login", err);
+            });
     }
     componentDidMount(){
         // $('#submit-button').popover('disable');
