@@ -14,10 +14,18 @@ function findUser(_username, _password, db, callback){
     collection.find({username: _username, password: _password}).toArray((err, docs) => {
         assert.equal(err, null);
         console.log("Found the following records");
-        var result = false;
-        if(docs.length!=0)
+        var result = {
+            username: _username
+        };
+        if(docs.length==0)
         {
-            result = true;
+            result.id = -1;
+            console.log("failed!");
+        }
+        else
+        {
+            result.id = docs[0].id;
+            console.log("success!");
         }
         callback && callback(result);
     });

@@ -3,11 +3,12 @@
  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Editor, EditorState, RichUtils, Modifier } from 'draft-js';
+import { convertToRaw, CompositeDecorator, Editor, EditorState, RichUtils, Modifier } from 'draft-js';
 const {colors, fonts, sizes} = require("./stylingConsts");
 import io from 'socket.io-client';
 import './textEditor.less';
 import 'draft-js/dist/Draft.css';
+import axios from 'axios';
 
 export default class TextEditor extends Component {
     constructor(props){
@@ -45,8 +46,8 @@ export default class TextEditor extends Component {
         console.log(arr);
         console.log(toggledStyle);
         // get editor state and selection state
-        // const { editorState } = this.state;
-        // const selection = editorState.getSelection();
+        const { editorState } = this.state;
+        const selection = editorState.getSelection();
         // // remove all other inline styling of this type to avoid toggling conflicts
         // const nextContentState = arr.reduce((contentState, style) => {
         //     return Modifier.removeInlineStyle(contentState, selection, style)
@@ -103,6 +104,80 @@ export default class TextEditor extends Component {
         }
         return 'not-handled';
     }
+
+    /*
+     **  changeRegex enables search functionality within the document
+     */
+    changeRegex(e) {
+        // bind this
+        const self = this;
+        // get current content
+        const currentContent = this.state.editorState.getCurrentContent();
+        console.log(currentContent);
+        // get the text of the search
+        this.setState({searchInput: e.target.value});
+        // set the default regex value to gibberish so it won't match anything by accident (since an empty string errors)
+        // makes a regex for the search text
+        const newRegex = new RegExp(e.target.value || 'djkfjskjdfkjasdjkfksdjfaksjdfkjsdfkjsdf', 'g');
+        // the search decoration styling is defined here; this turns the matching text light blue
+        const styles = {
+            search: {
+                color: 'rgba(98, 177, 254, 1.0)',
+                direction: 'ltr',
+                unicodeBidi: 'bidi-override',
+            }
+        };
+        // wrap the matching text in a span and style it
+        const SearchSpan = (props) => {
+            return (
+                <span style={styles.search} data-offset-key={props.offsetKey}>
+          {props.children}
+        </span>
+            );
+        };
+        // define strategy for seaching through the document text to find matches to the regex
+        const findWithRegex = function(regex, contentBlock, callback) {
+            const text = contentBlock.getText();
+            let matchArr, start;
+            while ((matchArr = regex.exec(text)) !== null) {
+                start = matchArr.index;
+                callback(start, start + matchArr[0].length);
+            }
+        }
+        // calls the findWithRegex function with the regex of search text defined above as 'newRegex'
+        const searchStrategy = function(contentBlock, callback, contentState) {
+            findWithRegex(newRegex, contentBlock, callback);
+        }
+        // CompositeDecorator is built into draft-js and enables us to find & decorate strings
+        // stragegy: searches through the document to find text that matches the search input
+        // component: dictates how to wrap and style the pieces of text that match
+        const searchDecorator = new CompositeDecorator([{
+            strategy: searchStrategy,
+            component: SearchSpan,
+        }]);
+        // ensures we don't go through the entire onChange function during this process
+        this.setState({changeRegex: true});
+        // updates editor state to include search decorator
+        this.setState({editorState: EditorState.createWithContent(currentContent, searchDecorator)});
+    }
+
+    autoSaveDocumennt(newState){
+        axios.get('http://localhost:3000/saveDocument', {
+            params: {
+                text: newState,
+                id: this.props.match.params.id
+            }
+        })
+            .then(resp => {
+                if (resp.status === 200) {
+                    console.log('success');
+                }
+            })
+            .catch(err => {
+                console.log("ERROR: Cannot retrieve document using axios request ", err);
+            })
+    }
+
     // goes back to previous page
     goBack(){
         this.props.history.go(-1);
@@ -132,7 +207,11 @@ export default class TextEditor extends Component {
                             <div className="form-group">
                                 <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm toolbar-button toolbar-item">Save</button>
                                 &nbsp;<span className="toolbar-divider"> | </span>&nbsp;
-                                <input className="form-control mr-sm-2 form-control-sm" type="search" placeholder="Search For Content" aria-label="Search"/>
+                                <input className="form-control mr-sm-2 form-control-sm"
+                                       type="search"
+                                       placeholder="Search For Content"
+                                       aria-label="Search"
+                                       onChange={this.changeRegex.bind(this)}/>
                             </div>
                             <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Search</button>
                         </form>
@@ -178,6 +257,7 @@ export default class TextEditor extends Component {
                             onChange={(editorState) => this.onChange(editorState)}
                             editorState = {this.state.editorState}
                             handleKeyCommand={this.handleKeyCommand}
+
                         />
                     </div>
                 </div>

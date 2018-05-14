@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Welcome from '../Components/Welcome/welcome';
+import { connect } from 'react-redux';
 import "./loginPage.less";
-export default class LoginPage extends Component {
+export class LoginPage extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -26,7 +27,8 @@ export default class LoginPage extends Component {
         })
             .then(resp => {
                 console.log(resp);
-                if(resp.data){
+                if(resp.data.id!=-1){
+                    this.props.onLogin(resp.data.id);
                     $('#submit-button').popover('hide');
                     this.setState({
                         fireRedirect: true
@@ -73,3 +75,21 @@ export default class LoginPage extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    console.log("mapStateToProps", state);
+    return {
+        userID: state.userID
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        onLogin: (_id) => {
+            console.log("when logging in");
+            const action = { type: "LOGIN", id: _id };
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
