@@ -32,7 +32,7 @@ app.get('/signup', (req, res) => {
 
 // creates a new file
 app.get('/createNewFile', (req, res) => {
-    dbDriver.createNewFile(req.query.userID, ()=>{
+    dbDriver.createNewFile(req.query.userID, req.query.docName, ()=>{
         res.send(true);
     });
 });

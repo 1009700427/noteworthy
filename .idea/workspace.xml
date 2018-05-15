@@ -6,9 +6,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Server.js" afterPath="$PROJECT_DIR$/Backend/Server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/database/dbDriver.js" afterPath="$PROJECT_DIR$/Backend/database/dbDriver.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/build/app.bundle.js" afterPath="$PROJECT_DIR$/reactApp/build/app.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/redux.js" afterPath="$PROJECT_DIR$/reactApp/redux.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js" afterPath="$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.css" afterPath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" afterPath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.less" afterPath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.less" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,22 +23,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="signUp.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reactApp/src/SignUp/signUp.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="26" column="44" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="44" />
-              <folding>
-                <element signature="e#43#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="loginPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reactApp/src/Login/loginPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
+            <state relative-caret-position="450">
               <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="30" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -51,8 +39,8 @@
       <file leaf-file-name="userHome.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="361">
+              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#43#84#0" expanded="true" />
@@ -61,11 +49,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="userHome.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="navbar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="e#43#69#0" expanded="true" />
               </folding>
@@ -76,8 +74,8 @@
       <file leaf-file-name="Server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/Server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+            <state relative-caret-position="435">
+              <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -86,8 +84,8 @@
       <file leaf-file-name="dbDriver.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/database/dbDriver.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="88" column="38" lean-forward="false" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
+            <state relative-caret-position="1410">
+              <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -97,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/reactApp/redux.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -126,7 +124,7 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reactApp/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="360">
               <caret line="26" column="49" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="49" />
               <folding>
                 <element signature="e#43#69#0" expanded="true" />
@@ -148,17 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&lt;link</find>
-      <find>search-box</find>
-      <find>bold</find>
-      <find>jquery</find>
-      <find>makeBold</find>
-      <find>onChange</find>
-      <find>submitMsg</find>
-      <find>popover</find>
-      <find>return</find>
-      <find>contentstate</find>
-      <find>onchange</find>
       <find>EditorState</find>
       <find>convertToRaw</find>
       <find>TextEditor</find>
@@ -178,6 +165,17 @@
       <find>this.props</find>
       <find>sign out</find>
       <find>this.</find>
+      <find>in</find>
+      <find>inpu</find>
+      <find>input</find>
+      <find>&lt;input</find>
+      <find>d</find>
+      <find>fire</find>
+      <find>firere</find>
+      <find>firered</find>
+      <find>fireredi</find>
+      <find>fireredire</find>
+      <find>myModal</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -201,7 +199,6 @@
         <option value="$PROJECT_DIR$/reactApp/src/Components/Welcome/welcome.less" />
         <option value="$PROJECT_DIR$/reactApp/src/Components/Welcome/welcome.js" />
         <option value="$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.less" />
-        <option value="$PROJECT_DIR$/reactApp/src/UserHome/userHome.less" />
         <option value="$PROJECT_DIR$/reactApp/src/Components/TextEditor/stylingConsts.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
@@ -215,11 +212,12 @@
         <option value="$PROJECT_DIR$/reactApp/src/Components/redux.js" />
         <option value="$PROJECT_DIR$/reactApp/app.js" />
         <option value="$PROJECT_DIR$/reactApp/src/Login/loginPage.js" />
+        <option value="$PROJECT_DIR$/reactApp/redux.js" />
+        <option value="$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js" />
+        <option value="$PROJECT_DIR$/reactApp/src/UserHome/userHome.less" />
         <option value="$PROJECT_DIR$/Backend/Server.js" />
         <option value="$PROJECT_DIR$/Backend/database/dbDriver.js" />
         <option value="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" />
-        <option value="$PROJECT_DIR$/reactApp/redux.js" />
-        <option value="$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js" />
       </list>
     </option>
   </component>
@@ -259,7 +257,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -283,6 +280,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="reactApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="noteworthy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="noteworthy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reactApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserHome" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -360,6 +379,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -488,7 +508,8 @@
       <workItem from="1526148715843" duration="1938000" />
       <workItem from="1526233999838" duration="5736000" />
       <workItem from="1526320188768" duration="7487000" />
-      <workItem from="1526406938331" duration="3557000" />
+      <workItem from="1526406938331" duration="4102000" />
+      <workItem from="1526418206198" duration="1422000" />
     </task>
     <task id="LOCAL-00001" summary="set up dev server">
       <created>1518419038533</created>
@@ -501,7 +522,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67921000" />
+    <option name="totallyTimeSpent" value="69888000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -744,13 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -826,11 +840,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/SignUp/signUp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="360">
           <caret line="26" column="44" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="44" />
-          <folding>
-            <element signature="e#43#84#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -852,7 +864,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="360">
           <caret line="26" column="49" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="49" />
           <folding>
             <element signature="e#43#69#0" expanded="true" />
@@ -860,9 +872,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/reactApp/redux.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/Login/loginPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
+        <state relative-caret-position="450">
           <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="30" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -871,44 +891,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reactApp/redux.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/database/dbDriver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="88" column="38" lean-forward="false" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="e#43#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/database/dbDriver.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1410">
+          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        <state relative-caret-position="361">
+          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#43#84#0" expanded="true" />

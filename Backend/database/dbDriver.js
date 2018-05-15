@@ -101,17 +101,17 @@ function findDocumentSize(userID, db, callback){
     });
 }
 
-function createNewFileHelper(userID, db) {
+function createNewFileHelper(userID,_docName, db) {
     // Get the documents collection
     const collection = db.collection('users');
     findDocumentSize(userID, db, (size) => {
         if(size==0){
-            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1}]}}, (err, result)=>{
+            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1, docName: _docName}]}}, (err, result)=>{
                 assert.equal(err, null);
             });
         }
         else {
-            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1}}}, (err, result) => {
+            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1, docName: _docName}}}, (err, result) => {
                 assert.equal(err, null);
             });
         }
@@ -119,12 +119,12 @@ function createNewFileHelper(userID, db) {
 }
 
 // handles creating new file
-module.exports.createNewFile = (userID, callback) => {
+module.exports.createNewFile = (userID, docName, callback) => {
     MongoClient.connect(url, (err, client) => {
        assert.equal(null, err);
        console.log("Connnected successfully to server");
        const db = client.db(dbName);
-       createNewFileHelper(userID, db);
+       createNewFileHelper(userID,docName, db);
        callback && callback();
     });
 };
