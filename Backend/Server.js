@@ -30,6 +30,13 @@ app.get('/signup', (req, res) => {
     });
 });
 
+// creates a new file
+app.get('/createNewFile', (req, res) => {
+    dbDriver.createNewFile(req.query.userID, ()=>{
+        res.send(true);
+    });
+});
+
 server.listen(port, function(){
     console.log('listening on *:' + port);
 });

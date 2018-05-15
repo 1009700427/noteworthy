@@ -16,6 +16,7 @@ export default class NavbarTop extends React.Component{
         this.setState({
             signOutRedirect: true
         });
+        this.props.signOut();
     }
     render(){
         return(

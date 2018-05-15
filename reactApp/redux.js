@@ -1,7 +1,8 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    userID: -1
+    userID: -1,
+    documentID: -1
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,6 +10,10 @@ const reducer = (state = initialState, action) => {
     switch(action.type){
         case 'LOGIN':
             return Object.assign({}, state, {userID: action.id});
+        case 'ENTER_NEW_FILE':
+            return Object.assign({}, state, {documentID: action.documentID});
+        case 'SIGN_OUT':
+            return Object.assign({}, state, {userID: -1, documentID: -1});
         default:
             return state;
     }

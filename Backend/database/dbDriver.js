@@ -31,7 +31,7 @@ function findUser(_username, _password, db, callback){
     });
 }
 
-
+// handles user login
 module.exports.loginAuth = (username, password, callback) => {
     // Use connect method to connect to the server
     MongoClient.connect(url, (err, client) => {
@@ -46,16 +46,33 @@ module.exports.loginAuth = (username, password, callback) => {
     });
 };
 
+function findUserSize(_username, _password, db, callback){
+    // Get the documents collection
+    const collection = db.collection('users');
+    collection.find().toArray((err, docs) => {
+        assert.equal(err, null);
+        let size = 0;
+        if(docs!=undefined){
+            size = docs.length;
+        }
+        callback && callback(size);
+    });
+}
+
 function addUser(_username, _password, db, callback){
     // Get the documents collection
     const collection = db.collection('users');
     // Find some documents
-    collection.insert({username: _username, password: _password}, (err, docs) => {
-        assert.equal(err, null);
-        console.log("inserted new user!");
+    findUserSize(_username, _password, db, (size) => {
+        collection.insert({username: _username, password: _password, id: parseInt(size+1)}, (err, docs) => {
+            assert.equal(err, null);
+            console.log("inserted new user!");
+        });
     });
+    callback && callback();
 }
 
+// handles user signup
 module.exports.userSignup = (username, password, callback) => {
     // Use connect method to connect to the server
     MongoClient.connect(url, (err, client) => {
@@ -65,5 +82,49 @@ module.exports.userSignup = (username, password, callback) => {
         const db = client.db(dbName);
         addUser(username, password, db);
         callback && callback();
+    });
+};
+
+function findDocumentSize(userID, db, callback){
+    const collection = db.collection('users');
+    collection.find({id: parseInt(userID)}).toArray((err, docs) => {
+        assert.equal(err, null);
+        console.log(userID, typeof(userID));
+        console.log(docs);
+        let size = 0;
+        console.log(docs[0].documents!=undefined);
+        if(docs[0].documents!=undefined)
+        {
+            size = docs[0].documents.length;
+        }
+        callback && callback(size);
+    });
+}
+
+function createNewFileHelper(userID, db) {
+    // Get the documents collection
+    const collection = db.collection('users');
+    findDocumentSize(userID, db, (size) => {
+        if(size==0){
+            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1}]}}, (err, result)=>{
+                assert.equal(err, null);
+            });
+        }
+        else {
+            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1}}}, (err, result) => {
+                assert.equal(err, null);
+            });
+        }
+    });
+}
+
+// handles creating new file
+module.exports.createNewFile = (userID, callback) => {
+    MongoClient.connect(url, (err, client) => {
+       assert.equal(null, err);
+       console.log("Connnected successfully to server");
+       const db = client.db(dbName);
+       createNewFileHelper(userID, db);
+       callback && callback();
     });
 };
