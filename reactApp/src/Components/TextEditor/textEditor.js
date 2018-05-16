@@ -3,6 +3,8 @@
  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { convertToRaw, CompositeDecorator, Editor, EditorState, RichUtils, Modifier } from 'draft-js';
 const {colors, fonts, sizes} = require("./stylingConsts");
 import io from 'socket.io-client';
@@ -10,7 +12,7 @@ import './textEditor.less';
 import 'draft-js/dist/Draft.css';
 import axios from 'axios';
 
-export default class TextEditor extends Component {
+export class TextEditor extends Component {
     constructor(props){
         super(props);
         this.state = {editorState: EditorState.createEmpty()};
@@ -19,7 +21,8 @@ export default class TextEditor extends Component {
     }
     onChange(editorState){
         this.setState({
-            editorState: editorState
+            editorState: editorState,
+            plainText: editorState.getCurrentContent().getPlainText()
         });
     }
 
@@ -178,9 +181,32 @@ export default class TextEditor extends Component {
             })
     }
 
+    // saves plain text
+    savePlainText(callback){
+        axios.get('http://localhost:3000/savePlainText',{
+            params: {
+                plainText: this.state.plainText,
+                userID: this.props.userID,
+                documentID: this.props.documentID
+            }
+        })
+            .then(resp => {
+                console.log(resp);
+                if (resp.status === 200) {
+                    console.log('success');
+                }
+                callback && callback();
+            })
+            .catch(err => {
+                console.log("ERROR: Cannot save plain text usinng axios request", err);
+            })
+    }
     // goes back to previous page
     goBack(){
-        this.props.history.go(-1);
+        console.log("go back");
+        this.savePlainText(()=>{
+            this.props.onReturn();
+        });
     }
     componentDidMount(){
     }
@@ -191,15 +217,15 @@ export default class TextEditor extends Component {
                 <div className="headerbar">
                     <div className="headerbar-left">
                         {/*<button type="button" className="btn btn-outline-danger btn-sm" aria-label="Left Align" onClick={() => this.goBack()}><Octicon name="arrow-left"/></button>*/}
-                        <button type="button" className="btn btn-outline-danger btn-sm" aria-label="Left Align" onClick={() => this.goBack()}>Return</button>
-
+                        <Link to="/user-home">
+                            <button type="button" className="btn btn-outline-danger btn-sm" aria-label="Left Align" onClick={() => this.goBack()}>Return</button>
+                        </Link>
                         &nbsp;&nbsp;
                         <span className="document-title">
                             {/*{this.props.documentTitle}*/}
                             Test Title
                         </span>
                     </div>
-
 
                     <span className="headerbar-right">
 
@@ -265,3 +291,25 @@ export default class TextEditor extends Component {
         );
     }
 }
+
+function mapStateToProps(state){
+    console.log(state);
+    return {
+        userID: state.userID,
+        documentID: state.documentID
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        onReturn: ()=>{
+            console.log("onReturn");
+            const action = {
+                type: 'RESET_DOCUMENT'
+            };
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextEditor);

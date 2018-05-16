@@ -25,10 +25,12 @@ export class UserHome extends Component {
             }
         })
             .then(resp => {
+                console.log(resp.data);
                 if (resp.status === 200) {
                     console.log('success');
                 }
-                $('#documentModal').modal('hide')
+                this.props.onEnterNewDoc(resp.data.docID);
+                $('#documentModal').modal('hide');
                 this.setState({
                     fireRedirect: true
                 });
@@ -36,6 +38,49 @@ export class UserHome extends Component {
             .catch(err => {
                 console.log("unable to create new file ", err);
             });
+    }
+    getDocs(callback){
+        axios.get('http://localhost:3000/getDocs', {
+            params: {
+                userID: this.props.userID
+            }
+        })
+            .then(resp => {
+                console.log(resp);
+                callback && callback(resp.data);
+            })
+            .catch(err => {
+                console.log("unable to get document ", err);
+            });
+    }
+    renderSingleDoc(document){
+        let plainText = document.plainText;
+        return (
+            <div className="card" id={document.docID}>
+                    <div className="card-body">
+                        <h5 className="card-title">{document.docName}</h5>
+                        <p className="card-text">{plainText}</p>
+                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                    </div>
+            </div>
+        );
+    }
+    renderDocs(callback){
+        this.getDocs((docs) => {
+            this.setState({
+                    documents: docs.map((document)=>{
+                        console.log(document, this.renderSingleDoc(document));
+                        return this.renderSingleDoc(document);
+                })
+            });
+            console.log(this.state.documents);
+            callback && callback();
+        });
+    }
+    componentWillMount(){
+        this.renderDocs(()=>{
+            console.log(this.state.documents);
+        });
     }
     render(){
         return(
@@ -49,7 +94,7 @@ export class UserHome extends Component {
                     <button className="btn btn-outline-light my-2 my-sm-0">Text Editor</button>
                 </Link>
 
-                <div className="modal fade" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="documentModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -69,8 +114,12 @@ export class UserHome extends Component {
                         </div>
                     </div>
                 </div>
-                {/*<TextEditor class="test"/>*/}
-                {/*<a>User Home</a>*/}
+                <br/>
+                <div id="card-container">
+                {
+                    this.state.documents
+                }
+                </div>
                 {
                     this.state.fireRedirect && (
                         <Redirect to={{pathname: '/text-editor'}}></Redirect>

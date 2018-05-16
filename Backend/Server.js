@@ -32,7 +32,21 @@ app.get('/signup', (req, res) => {
 
 // creates a new file
 app.get('/createNewFile', (req, res) => {
-    dbDriver.createNewFile(req.query.userID, req.query.docName, ()=>{
+    dbDriver.createNewFile(req.query.userID, req.query.docName, (docID)=>{
+        res.send(docID);
+    });
+});
+
+// gets all documents of the designated user
+app.get('/getDocs', (req, res)=>{
+    dbDriver.getDocuments(req.query.userID, (docs) => {
+        res.send(docs);
+    });
+});
+
+// saves document plain text to database
+app.get('/savePlainText', (req, res)=>{
+    dbDriver.savePlainText(req.query.plainText, req.query.userID, req.query.documentID, ()=>{
         res.send(true);
     });
 });

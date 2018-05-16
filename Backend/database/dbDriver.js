@@ -101,20 +101,25 @@ function findDocumentSize(userID, db, callback){
     });
 }
 
-function createNewFileHelper(userID,_docName, db) {
+function createNewFileHelper(userID,_docName, db, callback) {
     // Get the documents collection
     const collection = db.collection('users');
     findDocumentSize(userID, db, (size) => {
         if(size==0){
-            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1, docName: _docName}]}}, (err, result)=>{
+            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1, docName: _docName, plainText: ""}]}}, (err, result)=>{
                 assert.equal(err, null);
             });
         }
         else {
-            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1, docName: _docName}}}, (err, result) => {
+            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1, docName: _docName, plainText: ""}}}, (err, result) => {
                 assert.equal(err, null);
             });
         }
+        const response = {
+            docID: size+1
+        };
+        console.log("docID: "+(size+1));
+        callback && callback(response);
     });
 }
 
@@ -124,7 +129,54 @@ module.exports.createNewFile = (userID, docName, callback) => {
        assert.equal(null, err);
        console.log("Connnected successfully to server");
        const db = client.db(dbName);
-       createNewFileHelper(userID,docName, db);
-       callback && callback();
+       createNewFileHelper(userID,docName, db, ((docID)=>{
+           callback && callback(docID);
+       }));
+    });
+};
+
+function getDocumentsHelper(_userID, db, callback){
+    // Get the documents collection
+    const collection = db.collection('users');
+    collection.find({id: parseInt(_userID)}).toArray((err, docs)=>{
+        assert.equal(err, null);
+        let documents = [];
+        if(docs[0].documents!=undefined){
+            documents = docs[0].documents;
+        }
+        callback && callback(documents);
+    });
+}
+
+// gets the documents of the designated user
+module.exports.getDocuments = (userID, callback) => {
+    MongoClient.connect(url, (err, client)=>{
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        const db = client.db(dbName);
+        getDocumentsHelper(userID, db, (docs)=>{
+            callback && callback(docs);
+        });
+    });
+};
+
+function savePlainTextHelper(db, _plainText, _userID, _documentID){
+    const collection = db.collection('users');
+    console.log(_userID, _documentID);
+    console.log(typeof(_userID), typeof(_documentID));
+    collection.update({"id": parseInt(_userID), "documents.docID": parseInt(_documentID)}, {$set: {"documents.$.plainText": _plainText}}, (err, result)=>{
+            assert.equal(err, null);
+        });
+}
+
+// saves the plain text to database
+module.exports.savePlainText = (plainText, userID, documentID, callback) => {
+    MongoClient.connect(url, (err, client)=>{
+        assert.equal(err, null);
+        console.log('Connected successfully to server');
+        const db = client.db(dbName);
+        console.log(plainText);
+        savePlainTextHelper(db, plainText, userID, documentID);
+        callback && callback();
     });
 };

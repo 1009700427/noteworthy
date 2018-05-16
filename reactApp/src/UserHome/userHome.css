@@ -10,3 +10,12 @@
 .modal-title {
   color: black;
 }
+.card {
+  width: 18rem;
+  color: black;
+  margin: 1.5%;
+  display: inline-block;
+}
+.card h5 {
+  color: black;
+}

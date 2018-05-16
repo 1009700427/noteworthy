@@ -14,6 +14,8 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {documentID: action.documentID});
         case 'SIGN_OUT':
             return Object.assign({}, state, {userID: -1, documentID: -1});
+        case 'RESET_DOCUMENT':
+            return Object.assign({}, state, {documentID: -1});
         default:
             return state;
     }
