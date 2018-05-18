@@ -40,15 +40,23 @@ app.get('/createNewFile', (req, res) => {
 // gets all documents of the designated user
 app.get('/getDocs', (req, res)=>{
     dbDriver.getDocuments(req.query.userID, (docs) => {
+        console.log("docs:  " + docs);
         res.send(docs);
     });
 });
 
 // saves document plain text to database
-app.get('/savePlainText', (req, res)=>{
-    dbDriver.savePlainText(req.query.plainText, req.query.userID, req.query.documentID, ()=>{
+app.get('/saveText', (req, res)=>{
+    dbDriver.saveText(req.query.plainText, req.query.userID, req.query.documentID, req.query.styledText, ()=>{
         res.send(true);
     });
+});
+
+// finds the document given the docID
+app.get('/findDoc', (req, res)=>{
+    dbDriver.findDoc(req.query.docID, (doc)=>{
+        res.send(doc);
+    })
 });
 
 server.listen(port, function(){

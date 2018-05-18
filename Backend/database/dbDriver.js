@@ -86,16 +86,16 @@ module.exports.userSignup = (username, password, callback) => {
 };
 
 function findDocumentSize(userID, db, callback){
-    const collection = db.collection('users');
-    collection.find({id: parseInt(userID)}).toArray((err, docs) => {
+    const collection = db.collection('documents');
+    collection.find().toArray((err, docs) => {
         assert.equal(err, null);
         console.log(userID, typeof(userID));
         console.log(docs);
         let size = 0;
-        console.log(docs[0].documents!=undefined);
-        if(docs[0].documents!=undefined)
+        //console.log(docs[0].documents!=undefined);
+        if(docs.length!=0)
         {
-            size = docs[0].documents.length;
+            size = docs.length;
         }
         callback && callback(size);
     });
@@ -103,18 +103,12 @@ function findDocumentSize(userID, db, callback){
 
 function createNewFileHelper(userID,_docName, db, callback) {
     // Get the documents collection
-    const collection = db.collection('users');
+    const collection = db.collection('documents');
     findDocumentSize(userID, db, (size) => {
-        if(size==0){
-            collection.update({id: parseInt(userID)}, {$set: {documents: [{docID: size+1, docName: _docName, plainText: ""}]}}, (err, result)=>{
-                assert.equal(err, null);
-            });
-        }
-        else {
-            collection.update({id: parseInt(userID)}, {$push: {documents: {docID: size+1, docName: _docName, plainText: ""}}}, (err, result) => {
-                assert.equal(err, null);
-            });
-        }
+        collection.insert({docID: parseInt(size+1), docName: _docName}, (err, docs)=>{
+            assert.equal(err, null);
+            console.log("inserted new document!");
+        });
         const response = {
             docID: size+1
         };
@@ -127,7 +121,7 @@ function createNewFileHelper(userID,_docName, db, callback) {
 module.exports.createNewFile = (userID, docName, callback) => {
     MongoClient.connect(url, (err, client) => {
        assert.equal(null, err);
-       console.log("Connnected successfully to server");
+       console.log("Connected successfully to server");
        const db = client.db(dbName);
        createNewFileHelper(userID,docName, db, ((docID)=>{
            callback && callback(docID);
@@ -137,14 +131,10 @@ module.exports.createNewFile = (userID, docName, callback) => {
 
 function getDocumentsHelper(_userID, db, callback){
     // Get the documents collection
-    const collection = db.collection('users');
-    collection.find({id: parseInt(_userID)}).toArray((err, docs)=>{
+    const collection = db.collection('documents');
+    collection.find().toArray((err, docs)=>{
         assert.equal(err, null);
-        let documents = [];
-        if(docs[0].documents!=undefined){
-            documents = docs[0].documents;
-        }
-        callback && callback(documents);
+        callback && callback(docs);
     });
 }
 
@@ -160,23 +150,43 @@ module.exports.getDocuments = (userID, callback) => {
     });
 };
 
-function savePlainTextHelper(db, _plainText, _userID, _documentID){
-    const collection = db.collection('users');
+function saveTextHelper(db, _plainText, _userID, _documentID, _styledText){
+    const collection = db.collection('documents');
     console.log(_userID, _documentID);
     console.log(typeof(_userID), typeof(_documentID));
-    collection.update({"id": parseInt(_userID), "documents.docID": parseInt(_documentID)}, {$set: {"documents.$.plainText": _plainText}}, (err, result)=>{
+    collection.update({"docID": parseInt(_documentID)}, {$set: {"plainText": _plainText, "styledText": _styledText}}, (err, result)=>{
             assert.equal(err, null);
         });
 }
 
 // saves the plain text to database
-module.exports.savePlainText = (plainText, userID, documentID, callback) => {
+module.exports.saveText = (plainText, userID, documentID, styledText, callback) => {
     MongoClient.connect(url, (err, client)=>{
         assert.equal(err, null);
         console.log('Connected successfully to server');
         const db = client.db(dbName);
         console.log(plainText);
-        savePlainTextHelper(db, plainText, userID, documentID);
+        saveTextHelper(db, plainText, userID, documentID, styledText);
         callback && callback();
+    });
+};
+
+function findDocHelper(db, _docID, callback){
+    const collection = db.collection('documents');
+    collection.find({docID: parseInt(_docID)}).toArray((err, docs) => {
+        assert.equal(err, null);
+        callback && callback(docs[0]);
+    });
+}
+
+// finds the documents given the docID
+module.exports.findDoc = (docID, callback) => {
+    MongoClient.connect(url, (err, client) => {
+        assert.equal(err, null);
+        console.log('Connected successfully to server');
+        const db = client.db(dbName);
+        findDocHelper(db, docID, (doc) => {
+            callback && callback(doc);
+        });
     });
 };

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { convertToRaw, CompositeDecorator, Editor, EditorState, RichUtils, Modifier } from 'draft-js';
+import { convertToRaw, convertFromRaw, CompositeDecorator, Editor, EditorState, RichUtils } from 'draft-js';
 const {colors, fonts, sizes} = require("./stylingConsts");
 import io from 'socket.io-client';
 import './textEditor.less';
@@ -22,8 +22,11 @@ export class TextEditor extends Component {
     onChange(editorState){
         this.setState({
             editorState: editorState,
-            plainText: editorState.getCurrentContent().getPlainText()
+            plainText: editorState.getCurrentContent().getPlainText(),
+            styledText: convertToRaw(editorState.getCurrentContent())
         });
+        console.log(editorState.getCurrentContent());
+        console.log(convertToRaw(editorState.getCurrentContent()));
     }
 
     /*  _onClick toggles custom & supported block styles and supported inline styles
@@ -182,12 +185,13 @@ export class TextEditor extends Component {
     }
 
     // saves plain text
-    savePlainText(callback){
-        axios.get('http://localhost:3000/savePlainText',{
+    saveText(callback){
+        axios.get('http://localhost:3000/saveText',{
             params: {
                 plainText: this.state.plainText,
                 userID: this.props.userID,
-                documentID: this.props.documentID
+                documentID: this.props.documentID,
+                styledText: this.state.styledText
             }
         })
             .then(resp => {
@@ -198,18 +202,53 @@ export class TextEditor extends Component {
                 callback && callback();
             })
             .catch(err => {
-                console.log("ERROR: Cannot save plain text usinng axios request", err);
+                console.log("ERROR: Cannot save plain text using axios request", err);
             })
     }
     // goes back to previous page
     goBack(){
         console.log("go back");
-        this.savePlainText(()=>{
+        this.saveText(()=>{
             this.props.onReturn();
         });
     }
-    componentDidMount(){
+
+    // onnSubmit
+    onSubmit(event){
+        event.preventDefault();
     }
+    componentWillMount(){
+        console.log(this.props);
+        // loads the document from database
+        this.findDoc();
+    }
+    componentDidMount(){
+        //console.log(this.state.styledText);
+        //this.state.editorState.createWithContent(convertFromRaw(JSON.parse(this.state.styledText)));
+    }
+
+    // gets the designated document from database
+    findDoc(){
+        console.log("findDoc");
+        axios.get('http://localhost:3000/findDoc', {
+            params: {
+                docID: this.props.documentID
+            }
+        })
+        .then((resp) => {
+            console.log(resp);
+            this.setState({
+                plainText: resp.data.plainText,
+                styledText: resp.data.styledText,
+                editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(resp.data.styledText)))
+            });
+            // EditorState.createWithContent(convertFromRaw(JSON.parse(resp.data.styledText)));
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
     render() {
         let counter = 0;
         return (
@@ -222,16 +261,17 @@ export class TextEditor extends Component {
                         </Link>
                         &nbsp;&nbsp;
                         <span className="document-title">
-                            {/*{this.props.documentTitle}*/}
-                            Test Title
+                            {
+                                this.props.documentName
+                            }
                         </span>
                     </div>
 
                     <span className="headerbar-right">
 
-                        <form className="form-inline">
+                        <form className="form-inline" onSubmit={(e) => {this.onSubmit(e)}}>
                             <div className="form-group">
-                                <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm toolbar-button toolbar-item">Save</button>
+                                <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm toolbar-button toolbar-item" onClick={()=>{this.saveText()}}>Save</button>
                                 &nbsp;<span className="toolbar-divider"> | </span>&nbsp;
                                 <input className="form-control mr-sm-2 form-control-sm"
                                        type="search"
@@ -239,7 +279,7 @@ export class TextEditor extends Component {
                                        aria-label="Search"
                                        onChange={this.changeRegex.bind(this)}/>
                             </div>
-                            <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Search</button>
+                            <button className="btn btn-outline-primary my-2 my-sm-0 btn-sm">Search</button>
                         </form>
                     </span>
                     <br/>
@@ -296,7 +336,8 @@ function mapStateToProps(state){
     console.log(state);
     return {
         userID: state.userID,
-        documentID: state.documentID
+        documentID: state.documentID,
+        documentName: state.documentName
     }
 }
 

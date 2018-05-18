@@ -29,7 +29,7 @@ export class UserHome extends Component {
                 if (resp.status === 200) {
                     console.log('success');
                 }
-                this.props.onEnterNewDoc(resp.data.docID);
+                this.props.onEnterNewDoc(resp.data.docID, resp.data.docName);
                 $('#documentModal').modal('hide');
                 this.setState({
                     fireRedirect: true
@@ -54,25 +54,39 @@ export class UserHome extends Component {
             });
     }
     renderSingleDoc(document){
-        let plainText = document.plainText;
+        let plainText = "";
+        if(document.plainText){
+            plainText = document.plainText;
+        }
+        console.log(document);
         return (
             <div className="card" id={document.docID}>
                     <div className="card-body">
                         <h5 className="card-title">{document.docName}</h5>
                         <p className="card-text">{plainText}</p>
-                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                        <Link to={{
+                            pathname: '/text-editor'
+                        }} onClick={() => {this.props.onEnterNewDoc(document.docID, document.docName)}}>
+                            <a href="#" className="btn btn-primary">Go somewhere</a>
+                        </Link>
                     </div>
             </div>
         );
     }
     renderDocs(callback){
         this.getDocs((docs) => {
-            this.setState({
+            if(docs.length==0){
+
+            }
+            else
+            {
+                this.setState({
                     documents: docs.map((document)=>{
                         console.log(document, this.renderSingleDoc(document));
                         return this.renderSingleDoc(document);
-                })
-            });
+                    })
+                });
+            }
             console.log(this.state.documents);
             callback && callback();
         });
@@ -139,11 +153,12 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-        onEnterNewDoc: (_id) => {
+        onEnterNewDoc: (_id, _name) => {
             console.log("onEnterNewFile");
             const action = {
                 type: 'ENTER_NEW_FILE',
-                documentID: _id
+                documentID: _id,
+                documentName: _name
             };
             dispatch(action);
         },
