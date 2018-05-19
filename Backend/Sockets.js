@@ -22,6 +22,17 @@ module.exports = {
             socket.on('documentChange', (documentData) => {
                 socket.broadcast.to(socket.roomName).emit('documentChange', documentData);
             });
+            // handles cursor actions
+            socket.on('cursor', (data) => {
+                if(!data)
+                {
+                    return socket.emit('errorMessage', 'No compositeDecorator!');
+                }
+                else
+                {
+                    socket.broadcast.to(socket.roomName).emit('cursor', data);
+                }
+            })
         });
     }
 };

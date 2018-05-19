@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { convertToRaw, convertFromRaw, CompositeDecorator, Editor, EditorState, RichUtils } from 'draft-js';
-const {colors, fonts, sizes} = require("./stylingConsts");
+import { convertToRaw, convertFromRaw, CompositeDecorator, Editor, EditorState, RichUtils, Modifier } from 'draft-js';
+const {colors, fonts, sizes, styleMap} = require("./stylingConsts");
 import io from 'socket.io-client';
 import './textEditor.less';
 import 'draft-js/dist/Draft.css';
@@ -21,6 +21,7 @@ export class TextEditor extends Component {
         };
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this._onFontStyleClick = this._onFontStyleClick.bind(this);
+        this.onTab = (e) => this._onTab(e);
 
 
         console.log('before sockets');
@@ -35,7 +36,7 @@ export class TextEditor extends Component {
                 console.log('user joined with color ');
             });
 
-            // handles document chang e
+            // handles document change
             this.state.socket.on('documentChange', (documentData)=>{
                 console.log(documentData);
                 this.setState({
@@ -44,16 +45,106 @@ export class TextEditor extends Component {
                     plainText: documentData.blocks[0].text
                 });
             });
+
+            // handles cursor
+            this.state.socket.on('cursor', ({start, anchorKey, color}) => {
+                console.log('cursor');
+                this.trackMouse(start, anchorKey, color);
+            });
         });
     }
     onChange(editorState){
         this.setState({
             editorState: editorState,
             plainText: editorState.getCurrentContent().getPlainText(),
-            styledText: convertToRaw(editorState.getCurrentContent())
+            styledText: convertToRaw(editorState.getCurrentContent()),
+            selection: editorState.getSelection()
         });
         // keeps track of the change in document
         this.state.socket.emit('documentChange', convertToRaw(editorState.getCurrentContent()));
+
+        const newState = this._onHighlight(editorState);
+        this.state.socket.emit('documentChange', convertToRaw(newState.getCurrentContent()))
+
+
+        // check out what is selected
+        let selectionState = editorState.getSelection();
+        // start of the selection
+        let start = selectionState.getStartOffset();
+        // end of the selection
+        let end = selectionState.getEndOffset();
+        // the block where the cursor is
+        let anchorKey = selectionState.anchorKey;
+
+        // when nothing is selected
+        if(start == end){
+            // track cursor in other windows
+            this.state.socket.emit('cursor', {start, anchorKey, color: 'red'});
+        }
+    }
+
+    /*  trackMouse displays the mouse position of collaborators as colored lines in the document, a la google docs
+     **  pos: position of cursor
+     **  anchorKey: block containing the cursor
+     **  color: this user's assigned color
+     **  similar method as search
+     */
+    trackMouse(pos, anchorKey, color) {
+        console.log(pos, anchorKey, color);
+        // bind this
+        const self = this;
+        // get current content
+        const currentContent = this.state.editorState.getCurrentContent();
+        const newRegex = new RegExp('test', 'g')
+        // the cursor decoration styling is defined here; this creates a 1px line in this user's color
+        let styles = {
+            cursor: {
+                borderLeft: '1px solid ' + color,
+                direction: 'ltr',
+                unicodeBidi: 'bidi-override',
+            }
+        };
+        // same as search; define search strategy and cursor decoration
+        const cursorStrategy = function(contentBlock, callback, contentState) {
+            findWithRegex(newRegex, contentBlock, callback);
+        }
+        const findWithRegex = function(regex, contentBlock, callback) {
+            const text = contentBlock.getText();
+            const key = contentBlock.getKey();
+            let matchArr, start;
+            if (text.length > pos && key === anchorKey) {
+                callback(pos, pos + 1);
+            }
+        }
+        const CursorSpan = (props) => {
+            console.log(props);
+            return (
+                <span style={styles.cursor} data-offset-key={props.offsetKey}>
+          {props.children}
+        </span>
+            );
+        };
+        // iterates through the document, finds the cursor, and decorates where the cursor is
+        const cursorDecorator = new CompositeDecorator([{
+            strategy: cursorStrategy,
+            component: CursorSpan,
+        }]);
+        // ensures we don't go through the entire onChange function during this process
+        this.setState({changeRegex: true});
+        // updates editor state to contain the cursor decorator
+        this.setState({editorState: EditorState.createWithContent(currentContent, cursorDecorator)});
+    }
+
+    /*
+     **  _onHighlight toggles the inline style to highlight in this user's assigned color
+     */
+    _onHighlight(editorState) {
+        return RichUtils.toggleInlineStyle(editorState, 'highlight' + "green");
+    }
+
+    _onTab(e){
+        const maxDepth = 4;
+        this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
     }
 
     /*  _onClick toggles custom & supported block styles and supported inline styles
@@ -75,41 +166,39 @@ export class TextEditor extends Component {
         // get the value selected in the window
         let e = document.getElementById(selectId);
         let toggledStyle = e.options[e.selectedIndex].value;
-        console.log(selectId);
-        console.log(arr);
-        console.log(toggledStyle);
         // get editor state and selection state
         const { editorState } = this.state;
-        const selection = editorState.getSelection();
+        // const selection = editorState.getSelection();
+        // console.log(selection);
         // // remove all other inline styling of this type to avoid toggling conflicts
-        // const nextContentState = arr.reduce((contentState, style) => {
-        //     return Modifier.removeInlineStyle(contentState, selection, style)
-        // }, editorState.getCurrentContent());
-        // let nextEditorState = EditorState.push(
-        //     editorState,
-        //     nextContentState,
-        //     'change-inline-style'
-        // );
-        // const currentStyle = editorState.getCurrentInlineStyle();
-        // // unset style override for current style
-        // if (selection.isCollapsed()) {
-        //     nextEditorState = currentStyle.reduce((state, style) => {
-        //         return RichUtils.toggleInlineStyle(state, style);
-        //     }, nextEditorState);
-        // }
-        // // if this style is being toggled on, apply it
-        // if (!currentStyle.has(toggledStyle)) {
-        //     nextEditorState = RichUtils.toggleInlineStyle(
-        //         nextEditorState,
-        //         toggledStyle
-        //     );
-        // }
+        const nextContentState = arr.reduce((contentState, style) => {
+            return Modifier.removeInlineStyle(contentState, this.state.selection, style)
+        }, editorState.getCurrentContent());
+        let nextEditorState = EditorState.push(
+            editorState,
+            nextContentState,
+            'change-inline-style'
+        );
+        const currentStyle = editorState.getCurrentInlineStyle();
+        // unset style override for current style
+        if (this.state.selection.isCollapsed()) {
+            nextEditorState = currentStyle.reduce((state, style) => {
+                return RichUtils.toggleInlineStyle(state, style);
+            }, nextEditorState);
+        }
+        // if this style is being toggled on, apply it
+        if (!currentStyle.has(toggledStyle)) {
+            nextEditorState = RichUtils.toggleInlineStyle(
+                nextEditorState,
+                toggledStyle
+            );
+        }
         //console.log(nextEditorState);
         // updates editor state
-        //this.onChange(nextEditorState);
+        this.onChange(nextEditorState);
 
-        this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC"));
-        console.log(this.state.editorState);
+        //this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC"));
+        //console.log(this.state.editorState);
         //this._onClick()
     }
     /*  handleKeyCommand handles keyboard commands
@@ -350,7 +439,8 @@ export class TextEditor extends Component {
                             onChange={(editorState) => this.onChange(editorState)}
                             editorState = {this.state.editorState}
                             handleKeyCommand={this.handleKeyCommand}
-
+                            customStyleMap={styleMap}
+                            onTab={this.onTab}
                         />
                     </div>
                 </div>
