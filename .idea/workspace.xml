@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28a7a4e1-b519-43cb-bde7-88991e475b61" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Server.js" afterPath="$PROJECT_DIR$/Backend/Server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/database/dbDriver.js" afterPath="$PROJECT_DIR$/Backend/database/dbDriver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Sockets.js" afterPath="$PROJECT_DIR$/Backend/Sockets.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/build/app.bundle.js" afterPath="$PROJECT_DIR$/reactApp/build/app.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/redux.js" afterPath="$PROJECT_DIR$/reactApp/redux.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.js" afterPath="$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" afterPath="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,7 +47,7 @@
       <file leaf-file-name="userHome.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
+            <state relative-caret-position="-743">
               <caret line="65" column="54" lean-forward="false" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -61,8 +60,8 @@
       <file leaf-file-name="textEditor.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="242" column="108" lean-forward="false" selection-start-line="242" selection-start-column="108" selection-end-line="242" selection-end-column="108" />
+            <state relative-caret-position="368">
+              <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
               <folding>
                 <element signature="e#43#84#0" expanded="true" />
                 <element signature="e#367#401#0" expanded="true" />
@@ -71,11 +70,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Sockets.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Backend/Sockets.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="75" lean-forward="false" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/Server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="52" column="3" lean-forward="true" selection-start-line="52" selection-start-column="3" selection-end-line="52" selection-end-column="3" />
+            <state relative-caret-position="918">
+              <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -111,16 +120,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sockets.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/Sockets.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -134,8 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>l</find>
-      <find>li</find>
       <find>linkn</find>
       <find>link</find>
       <find>goBackgoBack</find>
@@ -161,9 +158,11 @@
       <find>createNewFile</find>
       <find>preventprepre</find>
       <find>saveText</find>
-      <find>onEnterNewDoc</find>
       <find>willmou</find>
       <find>findDoc</find>
+      <find>onEnterNewDoc</find>
+      <find>openso</find>
+      <find>createwith</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -192,7 +191,6 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.less" />
         <option value="$PROJECT_DIR$/node_modules/Server.js" />
-        <option value="$PROJECT_DIR$/Backend/Sockets.js" />
         <option value="$PROJECT_DIR$/Backend/Routes/auth.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/reactApp/src/SignUp/signUp.js" />
@@ -203,8 +201,9 @@
         <option value="$PROJECT_DIR$/reactApp/src/UserHome/userHome.less" />
         <option value="$PROJECT_DIR$/reactApp/redux.js" />
         <option value="$PROJECT_DIR$/reactApp/src/UserHome/userHome.js" />
-        <option value="$PROJECT_DIR$/Backend/Server.js" />
         <option value="$PROJECT_DIR$/Backend/database/dbDriver.js" />
+        <option value="$PROJECT_DIR$/Backend/Server.js" />
+        <option value="$PROJECT_DIR$/Backend/Sockets.js" />
         <option value="$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.js" />
       </list>
     </option>
@@ -548,7 +547,7 @@
       <workItem from="1526406938331" duration="4102000" />
       <workItem from="1526418206198" duration="4761000" />
       <workItem from="1526490721462" duration="5305000" />
-      <workItem from="1526664601081" duration="7428000" />
+      <workItem from="1526664601081" duration="12424000" />
     </task>
     <task id="LOCAL-00001" summary="set up dev server">
       <created>1518419038533</created>
@@ -561,7 +560,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85960000" />
+    <option name="totallyTimeSpent" value="90956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
@@ -571,12 +570,12 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901296" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -879,14 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Sockets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/Components/Navbar/navbar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -913,37 +904,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reactApp/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/redux.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="65" column="54" lean-forward="false" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="52" column="3" lean-forward="true" selection-start-line="52" selection-start-column="3" selection-end-line="52" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -956,10 +920,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/reactApp/src/UserHome/userHome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-743">
+          <caret line="65" column="54" lean-forward="false" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#43#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reactApp/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Sockets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="75" lean-forward="false" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reactApp/src/Components/TextEditor/textEditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="242" column="108" lean-forward="false" selection-start-line="242" selection-start-column="108" selection-end-line="242" selection-end-column="108" />
+        <state relative-caret-position="368">
+          <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
           <folding>
             <element signature="e#43#84#0" expanded="true" />
             <element signature="e#367#401#0" expanded="true" />

@@ -15,9 +15,36 @@ import axios from 'axios';
 export class TextEditor extends Component {
     constructor(props){
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        this.state = {
+            editorState: EditorState.createEmpty(),
+            socket: io('http://localhost:3000')
+        };
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this._onFontStyleClick = this._onFontStyleClick.bind(this);
+
+
+        console.log('before sockets');
+        // sets up the socket
+        this.state.socket.on('connect', ()=>{
+            console.log('connected on the client side');
+            // tries to join the room
+            this.state.socket.emit('join', {docID: this.props.documentID});
+
+            // alerts that another user is viewing the document
+            this.state.socket.on('userJoined', () => {
+                console.log('user joined with color ');
+            });
+
+            // handles document chang e
+            this.state.socket.on('documentChange', (documentData)=>{
+                console.log(documentData);
+                this.setState({
+                    editorState: EditorState.createWithContent(convertFromRaw((documentData))),
+                    styledText: documentData,
+                    plainText: documentData.blocks[0].text
+                });
+            });
+        });
     }
     onChange(editorState){
         this.setState({
@@ -25,8 +52,8 @@ export class TextEditor extends Component {
             plainText: editorState.getCurrentContent().getPlainText(),
             styledText: convertToRaw(editorState.getCurrentContent())
         });
-        console.log(editorState.getCurrentContent());
-        console.log(convertToRaw(editorState.getCurrentContent()));
+        // keeps track of the change in document
+        this.state.socket.emit('documentChange', convertToRaw(editorState.getCurrentContent()));
     }
 
     /*  _onClick toggles custom & supported block styles and supported inline styles
