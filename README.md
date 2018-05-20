@@ -47,7 +47,15 @@ Installed MongoDB.
 When you first open the app, it will ask for your username and password. If you don't already have one, click on the register button and it will lead you to the register page. 
 
 Login Page: 
+
 ![1](https://user-images.githubusercontent.com/22974252/40284043-52904bb2-5c3d-11e8-90da-a13d1dbfc32b.png)
 
 Register Page: 
+
 ![2](https://user-images.githubusercontent.com/22974252/40284046-618ecb52-5c3d-11e8-850d-923dab81efdc.png)
+
+### User Home Page 
+After successfully logging into your account, all the documents available will be presented to you, with their proper name and contents in plain text. This page serves as the main page for the user to access documents.  
+
+![3](https://user-images.githubusercontent.com/22974252/40284058-bd30f87c-5c3d-11e8-8314-09af9e69553f.png)
+
