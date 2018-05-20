@@ -64,13 +64,16 @@ I created the text editor based on Draft.js library. The text editor allows for 
 
 The collaborative text editing functionality is implemented with Socket.io and Express.js. The .gif image below is a quick showcase of this functionality. 
 
-1: 
+Basic Text Syncing: 
+
 ![socketio1](https://user-images.githubusercontent.com/22974252/40284194-42c6265e-5c40-11e8-813d-8f976aa00a11.gif)
 
-2: 
+Font Style, User Selection Syncing: 
+
 ![socketio3](https://user-images.githubusercontent.com/22974252/40284241-04d43312-5c41-11e8-9627-a0c6c668d97c.gif)
 
-3: 
+List (Bullet/Number) Syncing:
+ 
 ![socketio2](https://user-images.githubusercontent.com/22974252/40284208-7413a678-5c40-11e8-804d-6b8037282e19.gif)
 
 The editor also supports inline text searching: 
