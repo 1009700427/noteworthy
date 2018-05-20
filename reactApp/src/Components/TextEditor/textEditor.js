@@ -6,10 +6,12 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { convertToRaw, convertFromRaw, CompositeDecorator, Editor, EditorState, RichUtils, Modifier } from 'draft-js';
-const {colors, fonts, sizes, styleMap} = require("./stylingConsts");
+const {colors, fonts, sizes, styleMap, getBlockStyle, extendedBlockRenderMap} = require("./stylingConsts");
 import io from 'socket.io-client';
 import './textEditor.less';
 import 'draft-js/dist/Draft.css';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/flip.css';
 import axios from 'axios';
 
 export class TextEditor extends Component {
@@ -60,6 +62,7 @@ export class TextEditor extends Component {
             styledText: convertToRaw(editorState.getCurrentContent()),
             selection: editorState.getSelection()
         });
+
         // keeps track of the change in document
         this.state.socket.emit('documentChange', convertToRaw(editorState.getCurrentContent()));
 
@@ -81,6 +84,9 @@ export class TextEditor extends Component {
             // track cursor in other windows
             this.state.socket.emit('cursor', {start, anchorKey, color: 'red'});
         }
+
+        // automatically saves the document to database
+        this.saveText();
     }
 
     /*  trackMouse displays the mouse position of collaborators as colored lines in the document, a la google docs
@@ -155,6 +161,7 @@ export class TextEditor extends Component {
         if (toggleType === 'inline') {
             this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style));
         } else {
+            console.log("on block change");
             this.onChange(RichUtils.toggleBlockType(this.state.editorState, style));
         }
     }
@@ -441,6 +448,8 @@ export class TextEditor extends Component {
                             handleKeyCommand={this.handleKeyCommand}
                             customStyleMap={styleMap}
                             onTab={this.onTab}
+                            blockStyleFn={getBlockStyle}
+                            blockRenderMap={extendedBlockRenderMap}
                         />
                     </div>
                 </div>

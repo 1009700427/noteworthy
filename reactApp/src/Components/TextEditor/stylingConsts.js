@@ -42,6 +42,42 @@ const styleMap = {
     24: { fontSize: 24 },
     36: { fontSize: 36 },
     72: { fontSize: 72 },
-}
+};
 
-module.exports = {colors, fonts, sizes, paragraphs, styleMap};
+// custom block render map function
+const getBlockStyle = function(contentBlock) {
+    const type = contentBlock.getType();
+    if (type === 'align-left') {
+        return 'align-left';
+    }
+    if (type === 'align-center') {
+        return 'align-center';
+    }
+    if (type === 'align-right') {
+        return 'align-right';
+    }
+    if (type === 'terminal') {
+        return 'terminal';
+    }
+    if (type === 'code') {
+        return 'code';
+    }
+    return null;
+};
+
+// custom block render map
+const blockRenderMap = Map({
+    'align-left': {
+        element: 'div'
+    },
+    'align-center': {
+        element: 'div'
+    },
+    'align-right': {
+        element: 'div'
+    }
+});
+
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
+
+module.exports = {colors, fonts, sizes, paragraphs, styleMap, getBlockStyle, extendedBlockRenderMap};

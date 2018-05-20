@@ -18,6 +18,13 @@ export default class NavbarTop extends React.Component{
         });
         this.props.signOut();
     }
+
+    // prevents form from submitting
+    onSubmit(event) {
+        event.preventDefault();
+    }
+
+    // handles
     render(){
         return(
             <div>
@@ -41,7 +48,7 @@ export default class NavbarTop extends React.Component{
                                     {/*<a className="nav-link" href="#">Disabled</a>*/}
                                 {/*</li>*/}
                             {/*</ul>*/}
-                            <form className="form-inline">
+                            <form className="form-inline" onSubmit={(e) => {this.onSubmit(e)}}>
                                 <div className="form-group">
                                     <input className="form-control mr-sm-2" type="search" placeholder="Search For Documents" aria-label="Search"/>
                                 </div>

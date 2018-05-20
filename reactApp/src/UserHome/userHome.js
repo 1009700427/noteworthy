@@ -67,7 +67,7 @@ export class UserHome extends Component {
                         <Link to={{
                             pathname: '/text-editor'
                         }} onClick={() => {this.props.onEnterNewDoc(document.docID, document.docName)}}>
-                            <a href="#" className="btn btn-primary">Go somewhere</a>
+                            <a href="#" className="btn btn-primary">Enter Document</a>
                         </Link>
                     </div>
             </div>
@@ -100,13 +100,11 @@ export class UserHome extends Component {
         return(
             <div className="user-home">
                 <NavbarTop signOut={this.props.signOut}/>
-                {/*<Link to="/text-editor">*/}
                     <button className="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#documentModal">New File</button>
+                {/*&nbsp;&nbsp;*/}
+                {/*<Link to="/text-editor">*/}
+                    {/*<button className="btn btn-outline-light my-2 my-sm-0">Text Editor</button>*/}
                 {/*</Link>*/}
-                &nbsp;&nbsp;
-                <Link to="/text-editor">
-                    <button className="btn btn-outline-light my-2 my-sm-0">Text Editor</button>
-                </Link>
 
                 <div className="modal fade" id="documentModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
