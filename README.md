@@ -30,7 +30,7 @@ Requires Node.js MongoDB installed.
 ## Built With 
 - Webpack 
 - Frontend 
-  - React.js 
+  - React/Redux
   - Draft.js 
   - Bootstrap 
   - LESS 
