@@ -18,7 +18,7 @@ Noteworthy is a web app that allows for easy sharing and collaborative working o
 #### Prerequisites
 Requires Node.js MongoDB installed.
 1. Clone the repository
-2. ```cd Disputify```
+2. ```cd noteworthy```
 3. Create a database named ```noteworthyDB```
 4. Create two collections: ```users``` and ```documents```
 5. Start the MongoDB server
