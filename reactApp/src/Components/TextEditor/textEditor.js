@@ -26,7 +26,6 @@ export class TextEditor extends Component {
         this.onTab = (e) => this._onTab(e);
 
 
-        console.log('before sockets');
         // sets up the socket
         this.state.socket.on('connect', ()=>{
             console.log('connected on the client side');
@@ -40,7 +39,6 @@ export class TextEditor extends Component {
 
             // handles document change
             this.state.socket.on('documentChange', (documentData)=>{
-                console.log(documentData);
                 this.setState({
                     editorState: EditorState.createWithContent(convertFromRaw((documentData))),
                     styledText: documentData,
@@ -123,7 +121,6 @@ export class TextEditor extends Component {
             }
         }
         const CursorSpan = (props) => {
-            console.log(props);
             return (
                 <span style={styles.cursor} data-offset-key={props.offsetKey}>
           {props.children}
@@ -216,7 +213,6 @@ export class TextEditor extends Component {
         console.log(command);
         if (command === 'myeditor-save') {
             this.props.saveDocument(convertToRaw(this.state.editorState.getCurrentContent()))
-            console.log('SAVED!!')
             return 'handled';
         } else if (command === 'myeditor-bold' || command === 'bold') {
             this._onClick('inline', 'BOLD')
@@ -318,7 +314,6 @@ export class TextEditor extends Component {
             }
         })
             .then(resp => {
-                console.log(resp);
                 if (resp.status === 200) {
                     console.log('success');
                 }
@@ -330,7 +325,6 @@ export class TextEditor extends Component {
     }
     // goes back to previous page
     goBack(){
-        console.log("go back");
         this.saveText(()=>{
             this.props.onReturn();
         });
@@ -359,7 +353,6 @@ export class TextEditor extends Component {
             }
         })
         .then((resp) => {
-            console.log(resp);
             this.setState({
                 plainText: resp.data.plainText,
                 styledText: resp.data.styledText,
@@ -459,7 +452,6 @@ export class TextEditor extends Component {
 }
 
 function mapStateToProps(state){
-    console.log(state);
     return {
         userID: state.userID,
         documentID: state.documentID,

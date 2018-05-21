@@ -25,7 +25,6 @@ export class UserHome extends Component {
             }
         })
             .then(resp => {
-                console.log(resp.data);
                 if (resp.status === 200) {
                     console.log('success');
                 }
@@ -46,7 +45,6 @@ export class UserHome extends Component {
             }
         })
             .then(resp => {
-                console.log(resp);
                 callback && callback(resp.data);
             })
             .catch(err => {
@@ -58,7 +56,6 @@ export class UserHome extends Component {
         if(document.plainText){
             plainText = document.plainText;
         }
-        console.log(document);
         return (
             <div className="card" id={document.docID}>
                     <div className="card-body">
@@ -87,7 +84,6 @@ export class UserHome extends Component {
                     })
                 });
             }
-            console.log(this.state.documents);
             callback && callback();
         });
     }
@@ -152,7 +148,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         onEnterNewDoc: (_id, _name) => {
-            console.log("onEnterNewFile");
             const action = {
                 type: 'ENTER_NEW_FILE',
                 documentID: _id,
